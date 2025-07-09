@@ -1,37 +1,31 @@
 #!/bin/bash
-echo '=== MEMOPYK Container Debug Report ==='
-echo 'Generated at:' $(date)
-echo
+echo '=== COMPREHENSIVE DEBUG REPORT ==='
 
-echo '=== Container Status ==='
-docker compose ps
-
-echo
-echo '=== Container Logs (last 30 lines) ==='
-docker compose logs web --tail=30
-
-echo
-echo '=== Container Process Check ==='
-docker compose exec web ps aux || echo 'Cannot connect to container'
+echo '1. Show .env file content:'
+echo 'DATABASE_PASSWORD in .env:'
+if [ -f .env ]; then
+    grep "DATABASE_PASSWORD" .env || echo "❌ DATABASE_PASSWORD not found in .env"
+else
+    echo "❌ .env file not found"
+fi
 
 echo
-echo '=== Port and Network Check ==='
-docker compose exec web netstat -tlnp || echo 'netstat not available'
-docker compose exec web ss -tlnp || echo 'ss not available'
+echo '2. Test container environment:'
+echo 'Container environment variables:'
+docker exec memopykcom-web-1 printenv | grep -E "(DATABASE|SUPABASE)" | head -10
 
 echo
-echo '=== Environment Variables ==='
-docker compose exec web env | grep -E '(DATABASE_URL|NODE_ENV|PORT|PUBLIC_DIR)' || echo 'Cannot access environment'
+echo '3. Container logs (last 20 lines):'
+docker compose logs web --tail=20
 
 echo
-echo '=== File System Check ==='
-docker compose exec web ls -la /usr/src/app/ || echo 'Cannot access filesystem'
-docker compose exec web ls -la /usr/src/app/dist/ || echo 'dist directory check failed'
+echo '4. Database connection test:'
+docker exec memopykcom-web-1 sh -c 'echo "DATABASE_PASSWORD length: ${#DATABASE_PASSWORD}"'
 
 echo
-echo '=== Health Check Manual Test ==='
-docker compose exec web curl -i http://localhost:3000/health || echo 'Internal health check failed'
+echo '5. Manual password test:'
+echo 'If DATABASE_PASSWORD is empty, we need to set it manually'
+echo 'Expected: DATABASE_PASSWORD=8rcP03lp6v... (from Replit secrets)'
 
 echo
-echo '=== End Debug Report ==='
-
+echo '=== DEBUG COMPLETE ==='
