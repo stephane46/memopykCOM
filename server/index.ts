@@ -1,6 +1,8 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+// Import production patch first to fix import.meta.dirname issue
+import "./production-patch";
 
 const app = express();
 app.use(express.json());
