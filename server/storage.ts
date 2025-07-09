@@ -46,8 +46,9 @@ async function initializeDatabase() {
       client.release();
       return true;
     } catch (err) {
-      console.error("❌ Production database connection failed:", err.message);
-      throw err;
+      console.error("⚠️ Production database connection failed, will retry on first request:", err.message);
+      // Don't throw error in production - let server start and retry on first request
+      return false;
     }
   }
   
@@ -115,8 +116,16 @@ async function initializeDatabase() {
 }
 
 // Initialize database connection using IIFE to handle ESM module constraints
+// In production, don't block server startup on database connection
 (async () => {
-  await initializeDatabase();
+  try {
+    await initializeDatabase();
+  } catch (error) {
+    console.error("⚠️ Database initialization failed, server will start anyway:", error.message);
+    if (process.env.NODE_ENV === 'production') {
+      console.log("🚀 Server will start without database - endpoints will retry connection");
+    }
+  }
 })();
 
 export interface IStorage {
@@ -177,7 +186,12 @@ export interface IStorage {
 
 function getDb() {
   if (!db) {
-    throw new Error("Database not initialized");
+    // In production, try to reinitialize database if not connected
+    if (process.env.NODE_ENV === 'production') {
+      console.log("🔄 Database not connected, attempting to reconnect...");
+      initializeDatabase().catch(err => console.error("Database reconnection failed:", err.message));
+    }
+    throw new Error("Database not initialized - please check database connection");
   }
   return db;
 }
