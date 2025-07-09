@@ -1,8 +1,8 @@
+// Import production patch FIRST to fix import.meta.dirname issue
+import "./production-patch";
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
-import { setupVite, serveStatic, log } from "./vite";
-// Import production patch first to fix import.meta.dirname issue
-import "./production-patch";
+import { serveProductionStatic } from "./production-static";
 
 const app = express();
 app.use(express.json());
@@ -31,7 +31,12 @@ app.use((req, res, next) => {
         logLine = logLine.slice(0, 79) + "…";
       }
 
-      log(logLine);
+      console.log(`${new Date().toLocaleTimeString("en-US", {
+        hour: "numeric",
+        minute: "2-digit", 
+        second: "2-digit",
+        hour12: true,
+      })} [express] ${logLine}`);
     }
   });
 
@@ -56,9 +61,12 @@ app.use((req, res, next) => {
     // setting up all the other routes so the catch-all route
     // doesn't interfere with the other routes
     if (process.env.NODE_ENV === "development") {
+      // Dynamically import vite functions only in development
+      const { setupVite } = await import("./vite");
       await setupVite(app, server);
     } else {
-      serveStatic(app);
+      // Use production-safe static serving
+      serveProductionStatic(app);
     }
 
     // Use PORT environment variable for Coolify or fallback to 3000 for production, 5000 for development
@@ -66,7 +74,12 @@ app.use((req, res, next) => {
     
     server.listen(port, "0.0.0.0", () => {
       console.log(`✅ MEMOPYK server running successfully on port ${port}`);
-      log(`serving on port ${port}`);
+      console.log(`${new Date().toLocaleTimeString("en-US", {
+        hour: "numeric",
+        minute: "2-digit",
+        second: "2-digit", 
+        hour12: true,
+      })} [express] serving on port ${port}`);
     });
 
     // Graceful shutdown
