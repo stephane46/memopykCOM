@@ -11,6 +11,7 @@ services:
       - SUPABASE_SERVICE_KEY=${SUPABASE_SERVICE_KEY}
       - SUPABASE_ANON_KEY=${SUPABASE_ANON_KEY}
       - DATABASE_URL=${DATABASE_URL}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
       - NODE_ENV=production
       - PORT=3000
       - PUBLIC_DIR=/usr/src/app/dist/public

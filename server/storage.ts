@@ -25,6 +25,13 @@ async function initializeDatabase() {
   if (process.env.NODE_ENV === 'production') {
     console.log("🔄 Production mode: Using direct database connection...");
     
+    // Validate DATABASE_PASSWORD is available and is a string
+    const dbPassword = process.env.DATABASE_PASSWORD;
+    if (!dbPassword || typeof dbPassword !== 'string') {
+      throw new Error("DATABASE_PASSWORD environment variable is required and must be a string");
+    }
+    console.log("✅ DATABASE_PASSWORD validated as string");
+    
     const connectionString = process.env.DATABASE_URL;
     if (!connectionString) {
       throw new Error("DATABASE_URL environment variable is required");

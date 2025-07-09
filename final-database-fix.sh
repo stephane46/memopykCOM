@@ -3,9 +3,16 @@ echo '=== MEMOPYK Final Database Connection Fix ==='
 echo 'Using secure DATABASE_PASSWORD from environment'
 echo
 
+# Validate DATABASE_PASSWORD is available
+if [ -z "$DATABASE_PASSWORD" ]; then
+    echo "ERROR: DATABASE_PASSWORD environment variable is not set"
+    echo "Please set DATABASE_PASSWORD before running this script"
+    exit 1
+fi
+
 # Create .env with correct password from environment variable
 echo 'Step 1: Creating .env with secure password...'
-cat > .env << EOF
+cat > .env << 'ENVEOF'
 # Environment variables for VPS deployment
 # Database password from secure environment variable
 
@@ -21,7 +28,10 @@ PUBLIC_DIR=/usr/src/app/dist/public
 
 # Database Configuration (using secure password)
 DATABASE_URL=postgresql://postgres:${DATABASE_PASSWORD}@supabase.memopyk.org:5432/postgres
-EOF
+ENVEOF
+
+# Ensure DATABASE_PASSWORD is properly quoted for the container
+echo "DATABASE_PASSWORD=\"${DATABASE_PASSWORD}\"" >> .env
 
 echo 'Step 2: Restarting container with secure database connection...'
 docker compose down
@@ -38,7 +48,6 @@ curl -s http://localhost:3000/api/health | jq '.' || echo 'API test failed'
 
 echo
 echo '=== Final Database Connection Test ==='
-echo 'If you see database connection success above, the fix is complete!'
+echo 'If you see DATABASE_PASSWORD validated and connection success above, the fix is complete!'
 echo 'Website: http://localhost:3000'
 echo 'Admin: http://localhost:3000/admin'
-
