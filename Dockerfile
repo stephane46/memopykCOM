@@ -4,7 +4,7 @@ WORKDIR /usr/src/app
 
 # 1) Install everything (including devDeps)
 COPY package*.json ./
-RUN --network=host npm ci
+RUN npm ci
 
 # 2) Copy source and build
 COPY . .
@@ -19,7 +19,7 @@ RUN apk add --no-cache curl
 
 # 3) Install only prod deps
 COPY package*.json ./
-RUN --network=host npm ci --omit=dev
+RUN npm ci --omit=dev
 
 # 4) Pull in the built output
 COPY --from=builder /usr/src/app/dist ./dist
