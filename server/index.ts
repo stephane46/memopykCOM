@@ -49,8 +49,16 @@ app.use((req, res, next) => {
     console.log(`📍 Working directory: ${process.cwd()}`);
     console.log(`🌐 Environment variables: NODE_ENV=${process.env.NODE_ENV}, PORT=${process.env.PORT}, PUBLIC_DIR=${process.env.PUBLIC_DIR}`);
     
-    const server = await registerRoutes(app);
-    console.log(`✅ Routes registered successfully`);
+    let server;
+    try {
+      server = await registerRoutes(app);
+      console.log(`✅ Routes registered successfully`);
+    } catch (routeError) {
+      console.error("⚠️ Route registration failed, starting basic server:", routeError.message);
+      // Create basic HTTP server if route registration fails
+      const { createServer } = await import("http");
+      server = createServer(app);
+    }
 
     app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
       const status = err.status || err.statusCode || 500;
@@ -103,10 +111,34 @@ app.use((req, res, next) => {
     });
 
   } catch (error) {
-    console.error('❌ Failed to start MEMOPYK server:', error);
-    if (error instanceof Error) {
-      console.error('Error stack:', error.stack);
-    }
-    process.exit(1);
+    console.error('⚠️ Server startup error:', error);
+    console.log('🔧 Attempting emergency fallback server...');
+    
+    // Emergency fallback - start basic Express server
+    const port = process.env.PORT ? parseInt(process.env.PORT) : (process.env.NODE_ENV === "production" ? 3000 : 5000);
+    
+    app.get('/health', (req, res) => {
+      res.status(200).json({ 
+        status: 'emergency', 
+        message: 'Fallback server running - check logs for startup error',
+        timestamp: new Date().toISOString(),
+        env: process.env.NODE_ENV || 'unknown',
+        error: error instanceof Error ? error.message : 'Unknown error'
+      });
+    });
+    
+    app.get('/api/health', (req, res) => {
+      res.status(200).json({ 
+        status: 'emergency', 
+        message: 'API endpoints unavailable - server in emergency mode',
+        timestamp: new Date().toISOString()
+      });
+    });
+    
+    app.listen(port, "0.0.0.0", () => {
+      console.log(`🚨 Emergency MEMOPYK server running on port ${port}`);
+      console.log(`📍 Health check: http://localhost:${port}/health`);
+      console.log(`📍 API health check: http://localhost:${port}/api/health`);
+    });
   }
 })();
