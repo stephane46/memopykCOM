@@ -11,6 +11,12 @@ if (typeof import.meta.dirname === 'undefined') {
   console.log('✅ Patched import.meta.dirname for production compatibility');
 }
 
+// Ensure PUBLIC_DIR environment variable exists
+if (!process.env.PUBLIC_DIR) {
+  process.env.PUBLIC_DIR = path.join(process.cwd(), 'dist', 'public');
+  console.log('✅ Set default PUBLIC_DIR for production compatibility');
+}
+
 // Export safe path resolver that never receives undefined
 export function safeResolve(...paths: (string | undefined)[]): string {
   const validPaths = paths.filter((p): p is string => typeof p === 'string' && p.length > 0);
