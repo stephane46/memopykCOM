@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(200, 89%, 8%);
+  --muted: hsl(40, 21%, 95%);
+  --muted-foreground: hsl(200, 16%, 45%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(200, 89%, 8%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(200, 89%, 8%);
+  --border: hsl(30, 12%, 90%);
+  --input: hsl(30, 12%, 90%);
+  --primary: hsl(197, 71%, 73%);
+  --primary-foreground: hsl(200, 100%, 99%);
+  --secondary: hsl(40, 21%, 95%);
+  --secondary-foreground: hsl(200, 89%, 8%);
+  --accent: hsl(40, 21%, 95%);
+  --accent-foreground: hsl(200, 89%, 8%);
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(60, 9%, 98%);
+  --ring: hsl(200, 89%, 8%);
+  --radius: 0.5rem;
+
+  /* MEMOPYK Brand Colors */
+  --memopyk-cream: hsl(40, 21%, 91%);
+  --memopyk-navy: hsl(200, 89%, 8%);
+  --memopyk-blue: hsl(200, 16%, 45%);
+  --memopyk-sky: hsl(197, 71%, 73%);
+  --memopyk-highlight: hsl(13, 68%, 67%);
+  --memopyk-white: hsl(0, 0%, 100%);
+  --memopyk-gray-light: hsl(220, 13%, 97%);
+  --memopyk-gray: hsl(220, 9%, 46%);
+}
+
+.dark {
+  --background: hsl(240, 10%, 4%);
+  --foreground: hsl(0, 0%, 98%);
+  --muted: hsl(240, 4%, 16%);
+  --muted-foreground: hsl(240, 5%, 65%);
+  --popover: hsl(240, 10%, 4%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --card: hsl(240, 10%, 4%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --border: hsl(240, 4%, 16%);
+  --input: hsl(240, 4%, 16%);
+  --primary: hsl(197, 71%, 73%);
+  --primary-foreground: hsl(200, 100%, 99%);
+  --secondary: hsl(240, 4%, 16%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --accent: hsl(240, 4%, 16%);
+  --accent-foreground: hsl(0, 0%, 98%);
+  --destructive: hsl(0, 63%, 31%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(240, 5%, 84%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-poppins antialiased bg-background text-foreground;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-playfair;
+  }
+}
+
+@layer utilities {
+  .font-playfair {
+    font-family: 'Playfair Display', serif;
+  }
+  
+  .font-poppins {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .bg-memopyk-cream {
+    background-color: var(--memopyk-cream);
+  }
+  
+  .bg-memopyk-navy {
+    background-color: var(--memopyk-navy);
+  }
+  
+  .bg-memopyk-blue {
+    background-color: var(--memopyk-blue);
+  }
+  
+  .bg-memopyk-sky {
+    background-color: var(--memopyk-sky);
+  }
+  
+  .bg-memopyk-highlight {
+    background-color: var(--memopyk-highlight);
+  }
+  
+  .bg-memopyk-white {
+    background-color: var(--memopyk-white);
+  }
+  
+  .bg-memopyk-gray-light {
+    background-color: var(--memopyk-gray-light);
+  }
+  
+  .text-memopyk-cream {
+    color: var(--memopyk-cream);
+  }
+  
+  .text-memopyk-navy {
+    color: var(--memopyk-navy);
+  }
+  
+  .text-memopyk-blue {
+    color: var(--memopyk-blue);
+  }
+  
+  .text-memopyk-sky {
+    color: var(--memopyk-sky);
+  }
+  
+  .text-memopyk-highlight {
+    color: var(--memopyk-highlight);
+  }
+  
+  .text-memopyk-white {
+    color: var(--memopyk-white);
+  }
+  
+  .text-memopyk-gray {
+    color: var(--memopyk-gray);
+  }
+  
+  .border-memopyk-cream {
+    border-color: var(--memopyk-cream);
+  }
+  
+  .border-memopyk-navy {
+    border-color: var(--memopyk-navy);
+  }
+  
+  .border-memopyk-blue {
+    border-color: var(--memopyk-blue);
+  }
+  
+  .border-memopyk-sky {
+    border-color: var(--memopyk-sky);
+  }
+  
+  .border-memopyk-highlight {
+    border-color: var(--memopyk-highlight);
+  }
+  
+  .hover\:bg-memopyk-highlight:hover {
+    background-color: var(--memopyk-highlight);
+  }
+  
+  .hover\:text-memopyk-highlight:hover {
+    color: var(--memopyk-highlight);
+  }
+  
+  .focus\:ring-memopyk-sky:focus {
+    --tw-ring-color: var(--memopyk-sky);
+  }
+}
