@@ -46,8 +46,11 @@ app.use((req, res, next) => {
 (async () => {
   try {
     console.log(`🚀 Starting MEMOPYK server in ${process.env.NODE_ENV || 'development'} mode...`);
+    console.log(`📍 Working directory: ${process.cwd()}`);
+    console.log(`🌐 Environment variables: NODE_ENV=${process.env.NODE_ENV}, PORT=${process.env.PORT}, PUBLIC_DIR=${process.env.PUBLIC_DIR}`);
     
     const server = await registerRoutes(app);
+    console.log(`✅ Routes registered successfully`);
 
     app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
       const status = err.status || err.statusCode || 500;
@@ -101,6 +104,9 @@ app.use((req, res, next) => {
 
   } catch (error) {
     console.error('❌ Failed to start MEMOPYK server:', error);
+    if (error instanceof Error) {
+      console.error('Error stack:', error.stack);
+    }
     process.exit(1);
   }
 })();

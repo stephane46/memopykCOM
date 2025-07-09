@@ -25,6 +25,34 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/health", (req, res) => {
     res.status(200).json({ status: "healthy", timestamp: new Date().toISOString() });
   });
+
+  // Diagnostic endpoint for production troubleshooting
+  app.get("/api/diagnostic", (req, res) => {
+    try {
+      res.status(200).json({
+        status: "operational",
+        timestamp: new Date().toISOString(),
+        environment: {
+          NODE_ENV: process.env.NODE_ENV,
+          PORT: process.env.PORT,
+          PUBLIC_DIR: process.env.PUBLIC_DIR,
+          cwd: process.cwd(),
+          dirname: (global as any).import?.meta?.dirname || 'undefined'
+        },
+        server: {
+          uptime: process.uptime(),
+          memory: process.memoryUsage(),
+          pid: process.pid
+        }
+      });
+    } catch (error) {
+      res.status(500).json({ 
+        status: "error", 
+        message: error instanceof Error ? error.message : 'Unknown error',
+        timestamp: new Date().toISOString()
+      });
+    }
+  });
   // Simple token-based auth - no sessions
   const ADMIN_TOKEN = "memopyk-admin-token-" + Date.now();
   const validTokens = new Set<string>();
