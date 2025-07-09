@@ -12,6 +12,7 @@ services:
       - SUPABASE_ANON_KEY=${SUPABASE_ANON_KEY}
       - NODE_ENV=production
       - PORT=3000
+      - STATIC_DIR=/usr/src/app/public
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
       interval: 15s

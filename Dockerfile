@@ -24,7 +24,11 @@ RUN npm ci --omit=dev
 # 4) Pull in the built output
 COPY --from=builder /usr/src/app/dist ./dist
 
-# 5) Expose & run
+# 5) Create public directory and copy static files from dist
+RUN mkdir -p public
+COPY --from=builder /usr/src/app/dist/public ./public
+
+# 6) Expose & run
 ENV PORT=3000
 EXPOSE 3000
 
