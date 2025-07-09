@@ -1,27 +1,34 @@
 #!/bin/bash
-echo '=== MEMOPYK Production Database Fix ==='
-echo 'Updating database connection from IP:5433 to domain:5432'
-echo
+echo '=== MEMOPYK Database Password Fix ==='
 
-# Update environment file  
-echo 'Step 1: Updating .env file...'
-cp .env.example .env
+# The actual password from Replit secrets
+PASSWORD="8rcP03lp6vJnzJhXVFe8g4RGRayJrwGqUNJGnKfJrEzSJqhLnQZhJqSGZE"
 
-echo 'Step 2: Restarting container with new database URL...'
+# Create proper .env file
+cat > .env << ENVEOF
+# Supabase Configuration
+SUPABASE_URL=https://supabase.memopyk.org
+SUPABASE_SERVICE_KEY=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzdXBhYmFzZSIsImlhdCI6MTc1MTk1ODA2MCwiZXhwIjo0OTA3NjMxNjYwLCJyb2xlIjoic2VydmljZV9yb2xlIn0.H4YCOnzIUraRH8d54ZB3aEh_kilgoqUnVN9-NboYB6I
+SUPABASE_ANON_KEY=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzdXBhYmFzZSIsImlhdCI6MTc1MTk1ODA2MCwiZXhwIjo0OTA3NjMxNjYwLCJyb2xlIjoiYW5vbiJ9.w44hBza3fxWqgzNEi6H0T3FSSCPUF8CNtoaoXS8a1I4
+
+# Application Configuration
+NODE_ENV=production
+PORT=3000
+PUBLIC_DIR=/usr/src/app/dist/public
+
+# Database Configuration
+DATABASE_URL=postgresql://postgres:${PASSWORD}@supabase.memopyk.org:5432/postgres
+DATABASE_PASSWORD=${PASSWORD}
+ENVEOF
+
+echo 'Fixed .env file created'
+echo 'Redeploying container...'
 docker compose down
 docker compose up -d
 
-echo 'Step 3: Testing database connection...'
+echo 'Testing database connection...'
 sleep 10
-
-echo 'Step 4: Checking server logs...'
 docker compose logs web --tail=10
+curl -I http://localhost:3000/health
 
-echo 'Step 5: Testing website functionality...'
-curl -i http://localhost:3000/api/health
-
-echo
-echo '=== Database Fix Complete ==='
-echo 'New DATABASE_URL: supabase.memopyk.org:5432'
-echo 'Previous DATABASE_URL: 82.29.168.136:5433 (connection refused)'
-
+echo '=== Fix Complete ==='
