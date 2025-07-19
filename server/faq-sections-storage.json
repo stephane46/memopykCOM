@@ -1,0 +1,42 @@
+[
+  {
+    "id": "general",
+    "key": "general",
+    "nameEn": "General Questions",
+    "nameFr": "Questions Générales",
+    "orderIndex": 0,
+    "isActive": true,
+    "createdAt": "2025-07-15T08:00:00.000Z",
+    "updatedAt": "2025-07-15T08:00:00.000Z"
+  },
+  {
+    "id": "getting-started",
+    "key": "getting-started",
+    "nameEn": "Getting Started",
+    "nameFr": "Commencer",
+    "orderIndex": 1,
+    "isActive": true,
+    "createdAt": "2025-07-15T08:00:00.000Z",
+    "updatedAt": "2025-07-15T08:00:00.000Z"
+  },
+  {
+    "id": "pricing",
+    "key": "pricing",
+    "nameEn": "Pricing & Packages",
+    "nameFr": "Tarifs & Packages",
+    "orderIndex": 2,
+    "isActive": true,
+    "createdAt": "2025-07-15T08:00:00.000Z",
+    "updatedAt": "2025-07-15T08:00:00.000Z"
+  },
+  {
+    "id": "process",
+    "key": "process",
+    "nameEn": "Process & Delivery",
+    "nameFr": "Processus & Livraison",
+    "orderIndex": 3,
+    "isActive": true,
+    "createdAt": "2025-07-15T08:00:00.000Z",
+    "updatedAt": "2025-07-15T08:00:00.000Z"
+  }
+]

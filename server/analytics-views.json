@@ -1,0 +1,47 @@
+[
+  {
+    "id": "test-view-1",
+    "sessionId": "test-session-1",
+    "videoId": "PomDog.mp4",
+    "videoType": "gallery",
+    "videoTitle": "Pom the dog",
+    "videoDuration": 120,
+    "watchTime": 95,
+    "watchPercentage": 79.2,
+    "maxWatchTime": 95,
+    "isCompleted": false,
+    "language": "fr-FR",
+    "createdAt": "2025-01-19T17:00:00.000Z",
+    "updatedAt": "2025-01-19T17:01:35.000Z"
+  },
+  {
+    "id": "test-view-2",
+    "sessionId": "test-session-2",
+    "videoId": "VideoHero1.mp4",
+    "videoType": "gallery",
+    "videoTitle": "Our Vitamin Sea",
+    "videoDuration": 90,
+    "watchTime": 90,
+    "watchPercentage": 100,
+    "maxWatchTime": 90,
+    "isCompleted": true,
+    "language": "en-US",
+    "createdAt": "2025-01-19T17:05:00.000Z",
+    "updatedAt": "2025-01-19T17:06:30.000Z"
+  },
+  {
+    "id": "test-view-3",
+    "sessionId": "test-session-3",
+    "videoId": "Safari.mp4",
+    "videoType": "gallery",
+    "videoTitle": "Safari Adventure",
+    "videoDuration": 150,
+    "watchTime": 120,
+    "watchPercentage": 80,
+    "maxWatchTime": 120,
+    "isCompleted": false,
+    "language": "fr-FR",
+    "createdAt": "2025-01-19T17:10:00.000Z",
+    "updatedAt": "2025-01-19T17:12:00.000Z"
+  }
+]

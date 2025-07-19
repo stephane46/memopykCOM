@@ -1,0 +1,20 @@
+[
+  {
+    "id": "default-text",
+    "titleFr": "Transformez vos souvenirs en films cinématographiques",
+    "titleEn": "Transform your memories into cinematic films",
+    "fontSize": 60,
+    "isActive": true,
+    "createdAt": "2025-01-19T22:13:00.000Z",
+    "updatedAt": "2025-07-19T17:36:57.627Z"
+  },
+  {
+    "id": "hero-text-1752946357036",
+    "titleEn": "Your memories deserve more than simple storage, they deserve a story.",
+    "titleFr": "Vos souvenirs méritent mieux que d’être simplement stockés : ils méritent une histoire.",
+    "fontSize": 60,
+    "isActive": false,
+    "createdAt": "2025-07-19T17:32:37.036Z",
+    "updatedAt": "2025-07-19T17:36:57.295Z"
+  }
+]

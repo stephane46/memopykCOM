@@ -1,0 +1,209 @@
+import { Helmet } from "react-helmet-async";
+import { useLanguage } from "@/hooks/use-language";
+
+interface SeoHeadProps {
+  page?: string;
+  title?: string;
+  description?: string;
+  canonicalUrl?: string;
+  ogImage?: string;
+  noIndex?: boolean;
+  alternateUrls?: {
+    'fr-FR': string;
+    'en-US': string;
+  };
+}
+
+function SeoHead({ 
+  page = 'home',
+  title,
+  description,
+  canonicalUrl,
+  ogImage,
+  noIndex = false,
+  alternateUrls
+}: SeoHeadProps) {
+  const { language, legacyLanguage } = useLanguage();
+  
+  // Default titles and descriptions by page and language
+  const defaults = {
+    home: {
+      title: {
+        fr: "MEMOPYK - Transformez vos souvenirs en films mémoire professionnels",
+        en: "MEMOPYK - Transform your memories into professional memory films"
+      },
+      description: {
+        fr: "Créez des films mémoire cinématographiques à partir de vos photos et vidéos. Service professionnel de montage vidéo personnalisé pour immortaliser vos moments précieux.",
+        en: "Create cinematic memory films from your photos and videos. Professional custom video editing service to immortalize your precious moments."
+      }
+    },
+    'mentions-legales': {
+      title: {
+        fr: "Mentions légales - MEMOPYK",
+        en: "Legal Notice - MEMOPYK"
+      },
+      description: {
+        fr: "Mentions légales et informations juridiques de MEMOPYK, service de création de films mémoire.",
+        en: "Legal notice and legal information for MEMOPYK, memory film creation service."
+      }
+    },
+    'politique-confidentialite': {
+      title: {
+        fr: "Politique de confidentialité - MEMOPYK", 
+        en: "Privacy Policy - MEMOPYK"
+      },
+      description: {
+        fr: "Politique de confidentialité et protection des données personnelles chez MEMOPYK.",
+        en: "Privacy policy and personal data protection at MEMOPYK."
+      }
+    },
+    'politique-cookies': {
+      title: {
+        fr: "Politique des cookies - MEMOPYK",
+        en: "Cookie Policy - MEMOPYK"
+      },
+      description: {
+        fr: "Politique d'utilisation des cookies et technologies de suivi chez MEMOPYK.",
+        en: "Cookie usage policy and tracking technologies at MEMOPYK."
+      }
+    },
+    'cgv': {
+      title: {
+        fr: "Conditions générales de vente - MEMOPYK",
+        en: "Terms of Sale - MEMOPYK"
+      },
+      description: {
+        fr: "Conditions générales de vente pour les services de création de films mémoire MEMOPYK.",
+        en: "General terms of sale for MEMOPYK memory film creation services."
+      }
+    },
+    'cgu': {
+      title: {
+        fr: "Conditions générales d'utilisation - MEMOPYK",
+        en: "Terms of Use - MEMOPYK"
+      },
+      description: {
+        fr: "Conditions générales d'utilisation du site web et des services MEMOPYK.",
+        en: "General terms of use for MEMOPYK website and services."
+      }
+    }
+  };
+
+  const pageDefaults = defaults[page as keyof typeof defaults] || defaults.home;
+  const finalTitle = title || pageDefaults.title[legacyLanguage];
+  const finalDescription = description || pageDefaults.description[legacyLanguage];
+  
+  // Generate current page URL
+  const baseUrl = typeof window !== 'undefined' 
+    ? window.location.origin 
+    : 'https://memopyk.com';
+  
+  const currentPath = typeof window !== 'undefined' 
+    ? window.location.pathname 
+    : `/${language}/`;
+    
+  const fullCanonicalUrl = canonicalUrl || `${baseUrl}${currentPath}`;
+  
+  // Generate hreflang URLs
+  const generateAlternateUrl = (lang: 'fr-FR' | 'en-US') => {
+    if (alternateUrls) {
+      return `${baseUrl}${alternateUrls[lang]}`;
+    }
+    
+    // Auto-generate based on current page and language
+    const pathMap = {
+      'mentions-legales': {
+        'fr-FR': '/fr-FR/mentions-legales',
+        'en-US': '/en-US/legal-notice'
+      },
+      'politique-confidentialite': {
+        'fr-FR': '/fr-FR/politique-confidentialite', 
+        'en-US': '/en-US/privacy-policy'
+      },
+      'politique-cookies': {
+        'fr-FR': '/fr-FR/politique-cookies',
+        'en-US': '/en-US/cookie-policy'
+      },
+      'cgv': {
+        'fr-FR': '/fr-FR/conditions-generales-vente',
+        'en-US': '/en-US/terms-of-sale'
+      },
+      'cgu': {
+        'fr-FR': '/fr-FR/conditions-generales-utilisation',
+        'en-US': '/en-US/terms-of-use'
+      }
+    };
+    
+    if (page in pathMap) {
+      return `${baseUrl}${pathMap[page as keyof typeof pathMap][lang]}`;
+    }
+    
+    // Default to homepage
+    return `${baseUrl}/${lang}/`;
+  };
+
+  return (
+    <Helmet>
+      {/* Basic Meta Tags */}
+      <html lang={legacyLanguage} />
+      <title>{finalTitle}</title>
+      <meta name="description" content={finalDescription} />
+      
+      {/* Robots directives */}
+      <meta name="robots" content={noIndex ? "noindex,nofollow" : "index,follow"} />
+      
+      {/* Canonical URL */}
+      <link rel="canonical" href={fullCanonicalUrl} />
+      
+      {/* Hreflang Links */}
+      <link rel="alternate" hrefLang="fr-FR" href={generateAlternateUrl('fr-FR')} />
+      <link rel="alternate" hrefLang="en-US" href={generateAlternateUrl('en-US')} />
+      <link rel="alternate" hrefLang="x-default" href={`${baseUrl}/`} />
+      
+      {/* Open Graph Tags */}
+      <meta property="og:type" content="website" />
+      <meta property="og:title" content={finalTitle} />
+      <meta property="og:description" content={finalDescription} />
+      <meta property="og:url" content={fullCanonicalUrl} />
+      <meta property="og:locale" content={language} />
+      <meta property="og:locale:alternate" content={language === 'fr-FR' ? 'en-US' : 'fr-FR'} />
+      <meta property="og:site_name" content="MEMOPYK" />
+      {ogImage && <meta property="og:image" content={ogImage} />}
+      
+      {/* Twitter Card Tags */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={finalTitle} />
+      <meta name="twitter:description" content={finalDescription} />
+      {ogImage && <meta name="twitter:image" content={ogImage} />}
+      
+      {/* Additional SEO Tags */}
+      <meta name="author" content="MEMOPYK" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+      
+      {/* JSON-LD Structured Data */}
+      {page === 'home' && (
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "name": "MEMOPYK",
+            "description": finalDescription,
+            "url": fullCanonicalUrl,
+            "logo": `${baseUrl}/logo.png`,
+            "sameAs": [],
+            "address": {
+              "@type": "PostalAddress",
+              "addressCountry": "FR"
+            },
+            "serviceType": "Video Production",
+            "areaServed": ["FR", "US"]
+          })}
+        </script>
+      )}
+    </Helmet>
+  );
+}
+
+export { SeoHead };
+export default SeoHead;

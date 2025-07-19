@@ -1,0 +1,47 @@
+[
+  {
+    "id": "test-session-1",
+    "sessionId": "test-session-1",
+    "ipAddress": "192.168.1.100",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+    "country": "France",
+    "continent": "Europe",
+    "city": "Paris",
+    "language": "fr-FR",
+    "isUniqueVisitor": true,
+    "isExcluded": false,
+    "isAdminSession": false,
+    "createdAt": "2025-01-19T17:00:00.000Z",
+    "lastActivity": "2025-01-19T17:01:35.000Z"
+  },
+  {
+    "id": "test-session-2",
+    "sessionId": "test-session-2",
+    "ipAddress": "203.0.113.50",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
+    "country": "United States",
+    "continent": "North America",
+    "city": "New York",
+    "language": "en-US",
+    "isUniqueVisitor": true,
+    "isExcluded": false,
+    "isAdminSession": false,
+    "createdAt": "2025-01-19T17:05:00.000Z",
+    "lastActivity": "2025-01-19T17:06:30.000Z"
+  },
+  {
+    "id": "test-session-3",
+    "sessionId": "test-session-3",
+    "ipAddress": "198.51.100.75",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36",
+    "country": "Canada",
+    "continent": "North America",
+    "city": "Toronto",
+    "language": "fr-FR",
+    "isUniqueVisitor": true,
+    "isExcluded": false,
+    "isAdminSession": false,
+    "createdAt": "2025-01-19T17:10:00.000Z",
+    "lastActivity": "2025-01-19T17:12:00.000Z"
+  }
+]
