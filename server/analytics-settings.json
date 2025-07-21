@@ -1,0 +1,10 @@
+{
+  "id": "default",
+  "excludedIps": [],
+  "completionThreshold": 90,
+  "trackingEnabled": true,
+  "dataRetentionDays": 365,
+  "createdAt": "2025-01-19T19:53:00.000Z",
+  "updatedAt": "2025-07-19T22:28:38.010Z",
+  "lastResetDate": "2025-07-19T22:28:35.828Z"
+}

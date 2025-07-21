@@ -1,0 +1,50 @@
+[
+  {
+    "id": "real-1",
+    "titleFr": "Chien",
+    "titleEn": "Dog",
+    "urlFr": "/api/video-proxy/memopyk-hero/VideoHero1.mp4",
+    "urlEn": "/api/video-proxy/memopyk-hero/VideoHero1.mp4",
+    "fallbackImageUrl": "/hero-fallback.jpg",
+    "orderIndex": 0,
+    "isActive": true,
+    "createdAt": "2025-07-10T14:18:24.706Z",
+    "updatedAt": "2025-07-12T05:04:54.985Z",
+    "hasLocalCopyEn": false,
+    "hasLocalCopyFr": false,
+    "localFileEn": null,
+    "localFileFr": null
+  },
+  {
+    "id": "real-2",
+    "titleFr": "Bébé",
+    "titleEn": "Baby",
+    "urlFr": "/api/video-proxy/memopyk-hero/1752156661215_VideoHero2.mp4",
+    "urlEn": "/api/video-proxy/memopyk-hero/1752156661215_VideoHero2.mp4",
+    "fallbackImageUrl": "/hero-fallback.jpg",
+    "orderIndex": 1,
+    "isActive": true,
+    "createdAt": "2025-07-10T14:18:24.706Z",
+    "updatedAt": "2025-07-12T05:04:54.976Z",
+    "hasLocalCopyEn": false,
+    "hasLocalCopyFr": false,
+    "localFileEn": null,
+    "localFileFr": null
+  },
+  {
+    "id": "1752159237471",
+    "titleFr": "Garçon",
+    "titleEn": "Boy",
+    "urlFr": "/api/video-proxy/memopyk-hero/1752159228374_VideoHero3.mp4",
+    "urlEn": "/api/video-proxy/memopyk-hero/1752159228374_VideoHero3.mp4",
+    "fallbackImageUrl": "/hero-fallback.jpg",
+    "orderIndex": 2,
+    "isActive": true,
+    "createdAt": "2025-07-10T14:53:57.471Z",
+    "updatedAt": "2025-07-10T16:28:28.281Z",
+    "hasLocalCopyEn": false,
+    "hasLocalCopyFr": false,
+    "localFileEn": null,
+    "localFileFr": null
+  }
+]

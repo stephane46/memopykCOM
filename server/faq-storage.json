@@ -1,0 +1,62 @@
+[
+  {
+    "id": "faq-1752572738455",
+    "sectionId": "general",
+    "orderIndex": 2,
+    "questionEn": "Question test EN",
+    "questionFr": "Question test FR",
+    "answerEn": "Answer test EN",
+    "answerFr": "Réponse test FR",
+    "isActive": true,
+    "createdAt": "2025-07-15T09:45:38.455Z",
+    "updatedAt": "2025-07-15T09:45:38.455Z"
+  },
+  {
+    "id": "faq-1752572791965",
+    "sectionId": "general",
+    "orderIndex": 2,
+    "questionEn": "New test question EN",
+    "questionFr": "Nouvelle question test FR",
+    "answerEn": "New test answer EN",
+    "answerFr": "Nouvelle réponse test FR",
+    "isActive": true,
+    "createdAt": "2025-07-15T09:46:31.965Z",
+    "updatedAt": "2025-07-15T09:46:31.965Z"
+  },
+  {
+    "id": "faq-1752572809058",
+    "sectionId": "general",
+    "orderIndex": 2,
+    "questionEn": "Final test question EN",
+    "questionFr": "Question finale test FR",
+    "answerEn": "Final test answer EN",
+    "answerFr": "Réponse finale test FR",
+    "isActive": true,
+    "createdAt": "2025-07-15T09:46:49.058Z",
+    "updatedAt": "2025-07-15T09:46:49.058Z"
+  },
+  {
+    "id": "faq-1752572825955",
+    "sectionId": "general",
+    "orderIndex": 2,
+    "questionEn": "DIRECT DATABASE TEST EN",
+    "questionFr": "DIRECT DATABASE TEST FR",
+    "answerEn": "DATABASE TEST ANSWER EN",
+    "answerFr": "RÉPONSE DATABASE TEST FR",
+    "isActive": true,
+    "createdAt": "2025-07-15T09:47:05.955Z",
+    "updatedAt": "2025-07-15T09:47:05.955Z"
+  },
+  {
+    "id": "faq-1752572919523",
+    "sectionId": "general",
+    "orderIndex": 3,
+    "questionEn": "FINAL DATABASE TEST SUCCESS EN",
+    "questionFr": "FINAL DATABASE TEST SUCCESS FR",
+    "answerEn": "DATABASE FINAL SUCCESS ANSWER EN",
+    "answerFr": "RÉPONSE DATABASE FINAL SUCCESS FR",
+    "isActive": true,
+    "createdAt": "2025-07-15T09:48:39.523Z",
+    "updatedAt": "2025-07-15T09:48:39.523Z"
+  }
+]
